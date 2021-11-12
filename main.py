@@ -1,5 +1,6 @@
 import click
 import sys
+from customer import *
 import os
 from item import *
 
@@ -7,12 +8,14 @@ from item import *
 # folders 
 __db_location__ = "db"
 __item_folder__ = f"{__db_location__}/item"
+__customer_folder__ = f"{__db_location__}/customer"
 
 
 
 def init(arguments):
 
     def db():
+        os.makedirs(__customer_folder__)
         os.makedirs(__item_folder__)
 
 
@@ -43,3 +46,25 @@ if __name__ == '__main__':
         elif command == "delete":
             item_delete(*params)
 
+    elif section == "customer":
+        # try:
+            if command == "create":
+                create_customer(*params)
+        
+            elif command == "all":
+                get_all_customers()
+        
+            elif command == "view":
+                customer_view_by_id(*params)
+        
+            elif command == "delete":
+                customer_delete(*params)
+        
+            elif command == "login":
+                login_user(*params)
+
+            elif command == "logout":
+                logout()
+        # except:
+        #     print("*** Please user details correctly..! ***")
+        
